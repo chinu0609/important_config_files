@@ -7,12 +7,13 @@
 :set softtabstop=4
 :set mouse=a
 :let mapleader=','
-:let g:python3_host_prog = substitute(system('which python3'), '\n', '', '')
 :set clipboard=unnamed
 
 :let g:coc_user_config = {
       \ 'python.pythonPath': substitute(system('which python3'), '\n', '', '')
       \ }
+
+
 
 
 call plug#begin()
@@ -31,18 +32,42 @@ Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
 Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'https://github.com/rebelot/kanagawa.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'olivercederborg/poimandres.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'EdenEast/nightfox.nvim' 
+Plug 'https://github.com/shaunsingh/nord.nvim.git'
+Plug 'https://github.com/yuratomo/w3m.vim.git'
+Plug 'jpmcb/nvim-llama'
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+Plug 'stevearc/dressing.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+
+" Optional deps
+Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-tree/nvim-web-devicons' "or Plug 'echasnovski/mini.icons'
+Plug 'HakonHarnes/img-clip.nvim'
+Plug 'zbirenbaum/copilot.lua'
 
 
+Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+require('avante').setup()
+EOF
 call plug#end()
+
+
+
+
 
 set encoding=UTF-8
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 nnoremap <C-f> :Telescope find_files<CR>
+nnoremap <C-a> :codeium#Accept()
+tnoremap <Esc> <C-\><C-n>
 map <Leader>c :terminal<CR> 
 nmap <F8> :TagbarToggle<CR>
 vnoremap <Leader>y "+y<CR>
@@ -53,7 +78,7 @@ map <Leader>t gt<CR>
 
 
 :set completeopt-=preview " For No Previews
-:colorscheme nightfox		 
+:colorscheme gruvbox	   
 
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
@@ -82,4 +107,4 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
+inoremap <expr> <C-Tab> pumvisible() ? coc#_select_confirm() : "<C-Tab>"
